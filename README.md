@@ -1,4 +1,32 @@
-# kitti_tools
+# camera_and_pointcloud_tools
+
+## pcl-pcd-viewer
+### build
+```
+cd pcl-pcd-viewer
+mkdir build
+cd build
+cmake ..
+make
+```
+### run
+```
+./pcldemo
+```
+
+## calibrate
+### build
+```
+cd calibrate
+mkdir build
+cd build
+cmake ..
+make
+```
+### run
+```
+./demo
+```
 
 ## kitti_fusion_pointcloud_and_image
 ### build
