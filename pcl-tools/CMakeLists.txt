@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.9)
-project(pcldemo)
+project(pcl-tools)
 set(CMAKE_CXX_STANDARD 17)
 # eigen
 find_package(Eigen3 REQUIRED)
@@ -21,8 +21,13 @@ link_directories(${VTK_LIBRARY_DIRS})
 # include_directories(${OPENCV_INCLUDE_DIRS})
 # link_directories(${OPENCV_LIBRARY_DIRS})
 
-add_executable(pcldemo main.cpp)
-target_link_libraries(pcldemo
+add_executable(bin2ascii_ascii2bin bin2ascii_ascii2bin.cpp)
+target_link_libraries(bin2ascii_ascii2bin
+libboost_system.so libboost_filesystem.so
+${PCL_LIBRARIES} 
+)
+add_executable(pclviewer pclviewer.cpp)
+target_link_libraries(pclviewer
 libboost_system.so libboost_filesystem.so
 ${VTK_LIBRARIES} ${PCL_LIBRARIES} 
 /usr/lib/x86_64-linux-gnu/libopencv_core.so

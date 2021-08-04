@@ -1,17 +1,24 @@
 # camera_and_pointcloud_tools
 
-## pcl-pcd-viewer
+## pcl-tools
 ### build
 ```
-cd pcl-pcd-viewer
+cd pcl-tools
 mkdir build
 cd build
 cmake ..
 make
 ```
 ### run
+pcl viewer
 ```
-./pcldemo
+./pclviwer
+```
+bin2ascii_ascii2bin Usage:
+```
+./bin2ascii_ascii2bin in.pcd out.pcd bin2ascii
+./bin2ascii_ascii2bin in.pcd out.pcd ascii2bin
+./bin2ascii_ascii2bin in.pcd out.pcd compress
 ```
 
 ## calibrate
