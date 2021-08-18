@@ -21,19 +21,27 @@ link_directories(${VTK_LIBRARY_DIRS})
 # include_directories(${OPENCV_INCLUDE_DIRS})
 # link_directories(${OPENCV_LIBRARY_DIRS})
 
-add_executable(bin2ascii_ascii2bin bin2ascii_ascii2bin.cpp)
-target_link_libraries(bin2ascii_ascii2bin
+add_executable(pcdbin2pcdascii_pcdascii2pcdbin pcdbin2pcdascii_pcdascii2pcdbin.cpp)
+target_link_libraries(pcdbin2pcdascii_pcdascii2pcdbin
 libboost_system.so libboost_filesystem.so
 ${PCL_LIBRARIES} 
 )
-add_executable(pclviewer pclviewer.cpp)
-target_link_libraries(pclviewer
+
+add_executable(csv2pcd csv2pcd.cpp)
+target_link_libraries(csv2pcd
 libboost_system.so libboost_filesystem.so
-${VTK_LIBRARIES} ${PCL_LIBRARIES} 
-/usr/lib/x86_64-linux-gnu/libopencv_core.so
-/usr/lib/x86_64-linux-gnu/libopencv_highgui.so
-/usr/lib/x86_64-linux-gnu/libopencv_imgproc.so
-/usr/lib/x86_64-linux-gnu/libopencv_videoio.so
-/usr/lib/x86_64-linux-gnu/libopencv_imgcodecs.so
+${PCL_LIBRARIES} 
 )
 
+add_executable(kittibin2pcd kittibin2pcd.cpp)
+target_link_libraries(kittibin2pcd
+libboost_system.so libboost_filesystem.so
+${PCL_LIBRARIES} 
+)
+
+
+add_executable(ply2pcd ply2pcd.cpp)
+target_link_libraries(ply2pcd
+libboost_system.so libboost_filesystem.so
+${PCL_LIBRARIES} 
+)

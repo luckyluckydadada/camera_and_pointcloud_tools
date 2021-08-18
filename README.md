@@ -1,24 +1,18 @@
 # camera_and_pointcloud_tools
 
-## pcl-tools
+## pcl-viewer
 ### build
 ```
-cd pcl-tools
+cd pcl-viewer
 mkdir build
 cd build
 cmake ..
 make
 ```
 ### run
-pcl viewer
+viewer
 ```
-./pclviwer
-```
-bin2ascii_ascii2bin Usage:
-```
-./bin2ascii_ascii2bin in.pcd out.pcd bin2ascii
-./bin2ascii_ascii2bin in.pcd out.pcd ascii2bin
-./bin2ascii_ascii2bin in.pcd out.pcd compress
+./viwer
 ```
 
 ## calibrate
@@ -49,21 +43,31 @@ make
 ./fusion yy.pcd zz.png calib.txt
 ```
 
-## kitti2pcd
+## pcl trans
 ### build
 ```
-cd kitti2pcd
-g++ bin2pcd.cpp -o bin2pcd
+cd pcl-trans
+mkdir build
+cd build
+cmake ..
+make
 ```
 ### run
+kitti2pcd
 ```
-./bin2pcd 000000.bin 000000.pcd
-# or 
+./kittibin2pcd 000000.bin 000000.pcd
 python kitti2pcd.py
 ```
-
+kitti_to_rosbag
+```
+https://github.com/ethz-asl/kitti_to_rosbag
+```
+pcdbin2pcdascii_pcdascii2pcdbin Usage:
+```
+./pcdbin2pcdascii_pcdascii2pcdbin in.pcd out.pcd bin2ascii
+./pcdbin2pcdascii_pcdascii2pcdbin in.pcd out.pcd ascii2bin
+./pcdbin2pcdascii_pcdascii2pcdbin in.pcd out.pcd compress
+```
 ## kitti_native_evaluation
 https://github.com/asharakeh/kitti_native_evaluation
 
-## kitti_to_rosbag
-https://github.com/ethz-asl/kitti_to_rosbag
