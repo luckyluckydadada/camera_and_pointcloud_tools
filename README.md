@@ -12,7 +12,7 @@ make
 ### run
 viewer
 ```
-./viwer
+./viewer
 ```
 
 ## calibrate
