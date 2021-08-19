@@ -32,3 +32,13 @@ ${VTK_LIBRARIES} ${PCL_LIBRARIES}
 /usr/lib/x86_64-linux-gnu/libopencv_imgcodecs.so
 )
 
+add_executable(cviewer cviewer.cpp)
+target_link_libraries(cviewer
+libboost_system.so libboost_filesystem.so
+${VTK_LIBRARIES} ${PCL_LIBRARIES} 
+/usr/lib/x86_64-linux-gnu/libopencv_core.so
+/usr/lib/x86_64-linux-gnu/libopencv_highgui.so
+/usr/lib/x86_64-linux-gnu/libopencv_imgproc.so
+/usr/lib/x86_64-linux-gnu/libopencv_videoio.so
+/usr/lib/x86_64-linux-gnu/libopencv_imgcodecs.so
+)

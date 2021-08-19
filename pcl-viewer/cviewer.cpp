@@ -25,8 +25,8 @@ int main(int argc, char **argv)
   {
     filename = argv[1];
   }
-  pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>());
-  if (pcl::io::loadPCDFile<pcl::PointXYZ>(filename, *cloud) == -1)
+  pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZRGB>());
+  if (pcl::io::loadPCDFile<pcl::PointXYZRGB>(filename, *cloud) == -1)
   {
     PCL_ERROR("Couldn't read file !\n");
     return (-1);
@@ -43,14 +43,14 @@ int main(int argc, char **argv)
   //             << " " << cloud->points[i].z << std::endl;
 
   // 随机颜色
-  pcl::visualization::PointCloudColorHandlerRandom<pcl::PointXYZ> random_color(cloud);
+  // pcl::visualization::PointCloudColorHandlerRandom<pcl::PointXYZ> random_color(cloud);
   // 定制颜色
   // pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> custom_color(cloud, 0, 0, 255);
 
   // 添加点云数据到viewer，并有颜色
-  viewer->addPointCloud<pcl::PointXYZ>(cloud, random_color, "sample cloud");
+  // viewer->addPointCloud<pcl::PointXYZ>(cloud, random_color, "sample cloud");
   // 添加点云数据到viewer
-  // viewer->addPointCloud<pcl::PointXYZ>(cloud, "sample cloud");
+  viewer->addPointCloud<pcl::PointXYZRGB>(cloud, "sample cloud");
 
   // 设置点云的显示（渲染）大小
   viewer->setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 2, "sample cloud");
