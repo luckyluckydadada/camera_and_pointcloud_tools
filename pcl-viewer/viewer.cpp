@@ -49,8 +49,6 @@ int main(int argc, char **argv)
 
   // 添加点云数据到viewer，并有颜色
   viewer->addPointCloud<pcl::PointXYZ>(cloud, random_color, "sample cloud");
-  // 添加点云数据到viewer
-  // viewer->addPointCloud<pcl::PointXYZ>(cloud, "sample cloud");
 
   // 设置点云的显示（渲染）大小
   viewer->setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 2, "sample cloud");

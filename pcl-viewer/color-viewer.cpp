@@ -42,13 +42,7 @@ int main(int argc, char **argv)
   //             << " " << cloud->points[i].y
   //             << " " << cloud->points[i].z << std::endl;
 
-  // 随机颜色
-  // pcl::visualization::PointCloudColorHandlerRandom<pcl::PointXYZ> random_color(cloud);
-  // 定制颜色
-  // pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> custom_color(cloud, 0, 0, 255);
 
-  // 添加点云数据到viewer，并有颜色
-  // viewer->addPointCloud<pcl::PointXYZ>(cloud, random_color, "sample cloud");
   // 添加点云数据到viewer
   viewer->addPointCloud<pcl::PointXYZRGB>(cloud, "sample cloud");
 

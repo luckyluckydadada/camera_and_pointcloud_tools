@@ -32,8 +32,8 @@ ${VTK_LIBRARIES} ${PCL_LIBRARIES}
 /usr/lib/x86_64-linux-gnu/libopencv_imgcodecs.so
 )
 
-add_executable(cviewer cviewer.cpp)
-target_link_libraries(cviewer
+add_executable(color-viewer color-viewer.cpp)
+target_link_libraries(color-viewer
 libboost_system.so libboost_filesystem.so
 ${VTK_LIBRARIES} ${PCL_LIBRARIES} 
 /usr/lib/x86_64-linux-gnu/libopencv_core.so
