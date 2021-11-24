@@ -18,7 +18,7 @@ int main(int argc, char **argv)
   if (argv[1] == NULL)
   {
     filename = getcwd(NULL, 0);
-    filename += "/../../example_data/bin.pcd";
+    filename += "/../example_data/bin.pcd";
     cout << "文件路径" << filename << endl;
   }
   else
