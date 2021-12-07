@@ -1,0 +1,223 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            // 第一个task： 在${workspaceFolder}/velodyne_grabber/中创建build文件夹，用于下一个task的cmake
+            //      除windows系统外执行的命令为`mkdir -p velodyne_grabber/build`
+            //      windows系统是在powershell中执行命令`mkdir -Force velodyne_grabber/build/`
+            "label": "build_dir",
+            "command": "mkdir",
+            "type": "shell",
+            "args": [
+                "-p",
+                "velodyne_grabber/build"
+            ],
+            "windows": {
+                "options": {
+                    "shell": {
+                        "executable": "powershell.exe"
+                    }
+                },
+                "args": [
+                    "-Force",
+                    "build"
+                ]
+            }
+        },
+        {
+            // 第二个task： build文件夹执行cmake进行项目配置
+            //      除windows系统外执行的命令为`cmake .. -DCMAKE_BUILD_TYPE=<Debug|Release|RelWithDebInfo|MinSizeRel> -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DRiVLib_DIR=/home/lucky/Desktop/baidu/rivlib-2_5_10-x86_64-linux-gcc5/cmake`
+            //      windows系统是在visual stuido的环境中执行命令`cmake .. -DCMAKE_BUILD_TYPE=<Debug|Release|RelWithDebInfo|MinSizeRel> -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -G "CodeBlocks - NMake Makefiles" -DRiVLib_DIR=/home/lucky/Desktop/baidu/rivlib-2_5_10-x86_64-linux-gcc5/cmake`
+            "label": "cmake",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "..",
+                "-DCMAKE_BUILD_TYPE=${input:CMAKE_BUILD_TYPE}",
+                "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON" // 生成compile_commands.json 供c/c++扩展提示使用
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/velodyne_grabber/build"
+            },
+            "windows": {
+                "args": [
+                    "..",
+                    "-DCMAKE_BUILD_TYPE=${input:CMAKE_BUILD_TYPE}",
+                    "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON", // 生成compile_commands.json 供c/c++扩展提示使用
+                    "-G",
+                    "\"CodeBlocks - NMake Makefiles\""
+                ],
+                "options": {
+                    "shell": {
+                        "executable": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\Build\\vcvarsall.bat", // 需要根据安装的vs版本调用vs工具命令提示符
+                        "args": [
+                            "${input:PLATFORM}", //指定平台
+                            "-vcvars_ver=${input:vcvars_ver}", //指定vc环境版本
+                            "&&"
+                        ]
+                    }
+                }
+            },
+            "dependsOn": [
+                "build_dir" // 在task `build_dir` 后执行该task
+            ]
+        },
+        {
+            // 第三个task： 在build文件夹中调用cmake编译构建debug程序
+            //      除windows系统外执行的命令为`cmake --build ./ --target all --`
+            //      windows系统如上需要在visual stuido的环境中执行命令
+            "label": "make",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "./",
+                "--target",
+                "all",
+                "--"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/velodyne_grabber/build"
+            },
+            "problemMatcher": "$gcc",
+            "windows": {
+                "options": {
+                    "shell": {
+                        // "executable": "C:\\Program Files (x86)\\Microsoft Visual Studio 12.0\\VC\\vcvarsall.bat",
+                        "executable": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\Build\\vcvarsall.bat",
+                        "args": [
+                            "${input:PLATFORM}",
+                            "-vcvars_ver=${input:vcvars_ver}",
+                            "&&"
+                        ]
+                    }
+                },
+                "problemMatcher": "$msCompile"
+            },
+            "dependsOn": [
+                "cmake" // 在task `cmake` 后执行该task
+            ]
+        },
+        {
+            // 第四个task： 在build文件夹中调用gcc -g -o udp-client ../udp-client.c
+            "label": "gcc-g",
+            "type": "shell",
+            "command": "gcc",
+            "args": [
+                "-g",
+                "-o",
+                "udp-client",
+                "../udp-client.c"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/velodyne_grabber/build"
+            },
+            "problemMatcher": "$gcc",
+            "windows": {
+                "options": {
+                    "shell": {
+                        // "executable": "C:\\Program Files (x86)\\Microsoft Visual Studio 12.0\\VC\\vcvarsall.bat",
+                        "executable": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\Build\\vcvarsall.bat",
+                        "args": [
+                            "${input:PLATFORM}",
+                            "-vcvars_ver=${input:vcvars_ver}",
+                            "&&"
+                        ]
+                    }
+                },
+                "problemMatcher": "$msCompile"
+            },
+            "dependsOn": [
+                "build_dir" // 在task `build_dir` 后执行该task
+            ]
+        },
+        {
+            // 第5个task： 在build文件夹中调用g++ -Wall -o udp-client ../udp-client.c -std=c++11 -lpthread
+            "label": "g++-g",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-g",
+                "-o",
+                "udp-client",
+                "../udp-client.c",
+                "-Wall",
+                "-std=c++11",
+                "-lpthread"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/velodyne_grabber/build"
+            },
+            "problemMatcher": "$gcc",
+            "windows": {
+                "options": {
+                    "shell": {
+                        // "executable": "C:\\Program Files (x86)\\Microsoft Visual Studio 12.0\\VC\\vcvarsall.bat",
+                        "executable": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\Build\\vcvarsall.bat",
+                        "args": [
+                            "${input:PLATFORM}",
+                            "-vcvars_ver=${input:vcvars_ver}",
+                            "&&"
+                        ]
+                    }
+                },
+                "problemMatcher": "$msCompile"
+            },
+            "dependsOn": [
+                "build_dir" // 在task `build_dir` 后执行该task
+            ]
+        }
+    ],
+    "inputs": [ // 用于前面task选项类型的交互
+        {
+            "id": "CMAKE_BUILD_TYPE",
+            "type": "pickString",
+            "description": "What CMAKE_BUILD_TYPE do you want to create?",
+            "options": [
+                "Debug",
+                "Release",
+                "RelWithDebInfo",
+                "MinSizeRel"
+            ],
+            "default": "Debug"
+        },
+        {
+            "id": "PLATFORM",
+            "type": "pickString",
+            "description": "What PLATFORM do you want to create?",
+            "options": [
+                "x86",
+                "amd64",
+                "arm",
+                "x86_arm",
+                "x86_amd64",
+                "amd64_x86",
+                "amd64_arm"
+            ],
+            "default": "amd64"
+        },
+        {
+            "id": "vcvars_ver",
+            "type": "pickString",
+            "description": "What vcvars_ver do you want to create?",
+            "options": [
+                "14.2", // 2019
+                "14.1", // 2017
+                "14.0", // 2015
+            ],
+            "default": "14.2"
+        }
+    ]
+}
