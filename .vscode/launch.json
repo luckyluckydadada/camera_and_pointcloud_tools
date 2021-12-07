@@ -1,14 +1,43 @@
 {
     "version": "0.2.0",
     "configurations": [
+        // 1 插件安装python
+        // 2 菜单栏 -》 Debug -》 Open Configurations
+        {
+            "name": "Python: 指定文件、参数、目录",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/a/convertyaml_map.py", // ${file} 表示当前文件
+            "console": "integratedTerminal",
+            // "cwd": "", // 指定调试的目录为工程所在目录
+            "cwd": "${fileDirname}", //  指定正打开的文件所在的目录，未必是指定的调试文件
+            "linux": { //linux的特定配置
+                "pythonPath": "/home/lucky/anaconda3/bin/python",
+            },
+            "windows": { //windows的特定配置
+                "pythonPath": "C:\\ProgramData\\Anaconda3\\python.exe", 
+            },
+            "args": [
+                "-x2y", // 参数不可以有空格，遇到空格则用“”新增一个参数
+                "32db.xml"
+            ]
+        },
+        {
+            "name": "Python: 当前文件无参数",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },
         {
             "name": "c/c++ Debug", //名称
             "type": "cppdbg", //调试类型，除使用msvc进行调试外，均为该类型
             "request": "launch",
             "program": "${workspaceFolder}/velodyne_grabber/build/HDL_grabber", //指定C/C++程序位置
             "args": [
-                "-pcap", "${workspaceFolder}/Building-Rear.pcap"// 引号内不要有空格
-                ], 
+                "-pcap",
+                "${workspaceFolder}/Building-Rear.pcap" // 引号内不要有空格
+            ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/velodyne_grabber/build", //指定工作目录
             // "preLaunchTask": "gcc-g", //在调试前会先调用build这个task编译构建程序
@@ -17,7 +46,7 @@
             "environment": [],
             "externalConsole": false,
             "sourceFileMap": {
-                "/build/glibc-S9d2JN": "/usr/src/glibc"  // https://blog.csdn.net/qq_32523711/article/details/110007587
+                "/build/glibc-S9d2JN": "/usr/src/glibc" // https://blog.csdn.net/qq_32523711/article/details/110007587
             },
             "osx": { //macOS的特定配置
                 // "miDebuggerPath": "/Applications/Xcode.app/Contents/ Developer/usr/bin/lldb-mi", //修改使用的lldb-mi，一般不需要修改

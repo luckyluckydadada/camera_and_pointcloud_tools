@@ -9,10 +9,24 @@ cd build
 cmake ..
 make
 ```
-## run
+## run 16线
 ```
 默认从velodyne设备（ip192.168.1.201，port2368）读取点云。
-./velodyne_grabber  
+./VLP_grabber 
+
+从指定velodyne设备读取点云。
+./VLP_grabber  -ip 192.168.1.201 -port 2368
+
+从velodyne录制的pcap文件读取点云。
+./VLP_grabber -pcap  
+```./
+
+## run 32线
+```
+
+默认从velodyne设备（ip192.168.1.201，port2368）读取点云。
+./HDL_grabber 
+
 从指定velodyne设备读取点云。
 ./velodyne_grabber  
 从velodyne录制的pcap文件读取点云。
