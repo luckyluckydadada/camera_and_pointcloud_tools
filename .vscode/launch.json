@@ -33,10 +33,12 @@
             "name": "c/c++ Debug", //名称
             "type": "cppdbg", //调试类型，除使用msvc进行调试外，均为该类型
             "request": "launch",
+            // "program": "${workspaceFolder}/velodyne_grabber/build/VLP_grabber", //指定C/C++程序位置
             "program": "${workspaceFolder}/velodyne_grabber/build/HDL_grabber", //指定C/C++程序位置
             "args": [
                 "-pcap",
-                "${workspaceFolder}/Building-Rear.pcap" // 引号内不要有空格
+                // "/home/lucky/data/velodyne32_pcap/Building-Rear.pcap"
+                "/home/lucky/data/velodyne16_pcap/2021-12-08-10-14-19_Velodyne-VLP-16-Data.pcap" // 引号内不要有空格
             ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/velodyne_grabber/build", //指定工作目录
