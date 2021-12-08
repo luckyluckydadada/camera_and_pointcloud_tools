@@ -12,10 +12,10 @@
             // "cwd": "", // 指定调试的目录为工程所在目录
             "cwd": "${fileDirname}", //  指定正打开的文件所在的目录，未必是指定的调试文件
             "linux": { //linux的特定配置
-                "pythonPath": "/home/lucky/anaconda3/bin/python",
+                "python": "/home/lucky/anaconda3/bin/python",
             },
             "windows": { //windows的特定配置
-                "pythonPath": "C:\\ProgramData\\Anaconda3\\python.exe", 
+                "python": "C:\\ProgramData\\Anaconda3\\python.exe", 
             },
             "args": [
                 "-x2y", // 参数不可以有空格，遇到空格则用“”新增一个参数

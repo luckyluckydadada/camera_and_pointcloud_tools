@@ -9,6 +9,8 @@ add_executable( HDL_grabber main32.cpp )
 # Set StartUp Project (This setting is able to enable by using CMake 3.6.0 RC1 or later.)
 set_property( DIRECTORY PROPERTY VS_STARTUP_PROJECT "project" )
 
+include(FindPCAP.cmake)
+
 # Find Packages
 find_package( PCL 1.8 REQUIRED )
 # [C/C++]>[General]>[Additional Include Directories]
@@ -20,5 +22,5 @@ add_definitions( ${PCL_DEFINITIONS} )
 # [Linker]>[General]>[Additional Library Directories]
 link_directories( ${PCL_LIBRARY_DIRS} )
 # [Linker]>[Input]>[Additional Dependencies]
-target_link_libraries( VLP_grabber ${PCL_LIBRARIES})
-target_link_libraries( HDL_grabber ${PCL_LIBRARIES})
+target_link_libraries( VLP_grabber ${PCL_LIBRARIES} ${PCAP_LIBRARY})
+target_link_libraries( HDL_grabber ${PCL_LIBRARIES} ${PCAP_LIBRARY})
