@@ -28,7 +28,7 @@ int main( int argc, char *argv[] )
     std::string ipaddress( "192.168.1.201" );
     std::string port( "2368" );
     std::string pcap;
-    std::string hdlCalibration("../32db.xml");
+    std::string hdlCalibration("../32db.xml"); //pcl::HDLGrabber支持多种： 32 64线等，修改不同的xml即可
     pcl::console::parse_argument( argc, argv, "-ipaddress", ipaddress );
     pcl::console::parse_argument( argc, argv, "-port", port );
     pcl::console::parse_argument( argc, argv, "-pcap", pcap );
