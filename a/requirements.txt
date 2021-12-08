@@ -1,7 +1,0 @@
-lxml==4.6.2
-ordereddict==1.1
-PyYAML==5.4.1
-xmljson==0.2.1
-xmlplain==1.6.0
-xmltodict==0.12.0
-yamale==3.0.4
