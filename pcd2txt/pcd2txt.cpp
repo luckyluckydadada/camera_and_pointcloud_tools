@@ -7,93 +7,26 @@
 #include <fstream>
 #include <string>
 
-void printUsage(const char *progName)
-{
-    std::cout << "\nUse: " << progName << " <file> -o <output dir>" << std::endl
-              << "Support: .pcd" << std::endl
-              << "[q] to exit" << std::endl;
-}
+using namespace std;
 
 int main(int argc, char **argv)
 {
     pcl::PointCloud<pcl::PointXYZI>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZI>());
-    std::vector<int> filenames;
-    bool file_is_pcd = false;
-
-    if (argc < 4 or argc > 4)
-    {
-        printUsage(argv[0]);
-        return -1;
-    }
-
-    pcl::console::TicToc tt;
-    pcl::console::print_highlight("Loading ...");
-
-    if (filenames.size() <= 0)
-    {
-        filenames = pcl::console::parse_file_extension_argument(argc, argv, ".pcd");
-        if (filenames.size() == 1)
-        {
-            file_is_pcd = true;
-        }
-    }
-    else
-    {
-        printUsage(argv[0]);
-        return -1;
-    }
-
-    std::string output_dir;
-    if (pcl::console::parse_argument(argc, argv, "-o", output_dir) == -1)
-    {
-        PCL_ERROR("Need an output directory! Please use <input cloud> -o <output dir>\n");
-        return (-1);
-    }
-
-    if (file_is_pcd)
-    {
-        if (pcl::io::loadPCDFile(argv[filenames[0]], *cloud) < 0)
-        {
-            std::cout << "Error loading point cloud " << argv[filenames[0]] << "\n";
-            printUsage(argv[0]);
-            return -1;
-        }
-        pcl::console::print_info("\nFound pcd file.\n");
-        pcl::console::print_info("Done, (");
-        pcl::console::print_value("%g", tt.toc());
-        pcl::console::print_info(" ms : ");
-        pcl::console::print_value("%d", cloud->size());
-        pcl::console::print_info(" points)\n");
-    }
-    else
-    {
-        printUsage(argv[0]);
-        return -1;
-    }
+    pcl::io::loadPCDFile(argv[1], *cloud);
 
     cloud->width = (int)cloud->points.size();
     cloud->height = 1;
     cloud->is_dense = true;
 
+    char txtfile[512];
+    sprintf(txtfile, "%s.txt", argv[1]);
     std::ofstream fout;
-
-    std::string str1 = output_dir;
-    str1 += "/txt_cloud.txt";
-    fout.open(str1.c_str());
+    fout.open(txtfile);
 
     for (int i = 0; i < cloud->points.size(); ++i)
     {
-        fout << cloud->points[i].x << " " << cloud->points[i].y << " " << cloud->points[i].z << " " << cloud->points[i].intensity << std::endl;
+        fout << to_string(cloud->points[i].x) << " " << to_string(cloud->points[i].y) << " " << to_string(cloud->points[i].z) << " " << to_string(cloud->points[i].intensity) << std::endl;
     }
-
     fout.close();
-    output_dir += "/txt_cloud.txt";
-
-    std::string sav = "[SUCCESSFUL] Data saved to: ";
-    sav += output_dir;
-
-    pcl::console::print_info(sav.c_str());
-    std::cout << std::endl;
-
     return 0;
 }

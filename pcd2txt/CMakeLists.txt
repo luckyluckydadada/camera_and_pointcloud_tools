@@ -1,15 +1,29 @@
-cmake_minimum_required(VERSION 3.0.2)
-project(pcd2txt)
+cmake_minimum_required(VERSION 3.9)
+project(pcl-tools)
+set(CMAKE_CXX_STANDARD 17)
+# eigen
+find_package(Eigen3 REQUIRED)
+include_directories("/usr/include/eigen3")
+# pcl
+find_package( PCL REQUIRED)
+include_directories( ${PCL_INCLUDE_DIRS} )  #.h 文件
+link_directories(${PCL_LIBRARY_DIRS}) # .so文件
+#Boost
+find_package(Boost REQUIRED)
+include_directories(${Boost_INCLUDE_DIRS})
+link_directories(${Boost_LIBRARY_DIRS})
+#VTK
+find_package(VTK REQUIRED)
+include_directories(${VTK_INCLUDE_DIRS})
+link_directories(${VTK_LIBRARY_DIRS})
+# #OPENCV
+# find_package(OPENCV REQUIRED)
+# include_directories(${OPENCV_INCLUDE_DIRS})
+# link_directories(${OPENCV_LIBRARY_DIRS})
 
-set(CMAKE_BUILD_TYPE Release)
-set(CMAKE_CXX_FLAGS "-std=c++11")
 
-find_package(PCL REQUIRED)
-include_directories(${PCL_INCLUDE_DIRS})
-
-add_definitions(${PCL_DEFINITIONS})
-link_directories(${PCL_LIBRARY_DIRS})
-
-set(MAIN_SOURCE "pcd2txt.cpp")
-add_executable(${PROJECT_NAME} ${MAIN_SOURCE})
-target_link_libraries(${PROJECT_NAME} ${PCL_LIBRARIES})
+add_executable(pcd2txt pcd2txt.cpp)
+target_link_libraries(pcd2txt 
+libboost_system.so libboost_filesystem.so
+${PCL_LIBRARIES} 
+)

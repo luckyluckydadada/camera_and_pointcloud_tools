@@ -2,7 +2,7 @@
 pcd转txt。
 ## Output file structure
 ```
-  x      y      z    intensity       # position (not printable)
+  x      y      z    intensity
 -0.1    0.1    0.1    0.0741
 -0.2    0.2    0.2    0.0762
 ...     ...    ...    ...
@@ -18,7 +18,7 @@ make
 ## Run
 
 ```
-./pcd2txt <pcd file> -o <output dir>
+./pcd2txt <pcd file> 
 ```
 
 
