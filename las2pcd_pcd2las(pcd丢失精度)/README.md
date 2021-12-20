@@ -1,5 +1,5 @@
 # las2pcd_pcd2las
-las转pcd。pcd转las。
+las转pcd。pcd转las。  las数据整数和小数部分都够大时，丢失小数部分精度。
 ## build
 ```
 sudo apt install liblas-dev liblas-c-dev
