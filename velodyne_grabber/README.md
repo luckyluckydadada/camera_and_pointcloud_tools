@@ -1,6 +1,14 @@
 # velodyne_grabber
 1 直接从velodyne激光设备读取点云，用vtk可视化。
+
 2 读取pcap文件（录制的velodyne激光点云文件），用vtk可视化。
+
+3 Parse pcap from HDL-32E Sensor Install dpkt
+```
+sudo apt-get install python-dpkt
+sudo apt-get install libxml2-dev libxslt-dev
+sudo apt-get install python-lxml
+```
 ## linux build
 ```
 cd velodyne_grabber
